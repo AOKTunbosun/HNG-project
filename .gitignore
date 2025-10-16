@@ -1,0 +1,35 @@
+# Python
+
+*.pyc
+/__pycache__/
+*.pyo
+*.pyd
+
+
+# Virtual environments
+env/
+venv/
+.local/
+.idea/
+
+# Django stuff
+*.sqlite3
+db.sqlite3
+/media/
+/staticfiles/
+
+# Environments files
+.env
+*.env
+
+# Logs
+*.log
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Docker
+.dockerignore
+credentials.txt
+
