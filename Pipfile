@@ -8,6 +8,7 @@ django = "*"
 djangorestframework = "*"
 requests = "*"
 gunicorn = "*"
+django-environ = "*"
 
 [dev-packages]
 

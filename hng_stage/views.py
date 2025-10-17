@@ -3,21 +3,22 @@ import requests
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 from datetime import datetime
+from django.conf import settings
 
 
 MY_DETAILS = {
     "status": "success",
     "user":{
-        "name": "Keruwole AbdAllah Olatunbosun",
-        "email": "aokolatunbosun@gmail.com",
-        "stack": "Python/Django"},
+        "name": settings.NAME,
+        "email": settings.EMAIL,
+        "stack": settings.STACK},
     
 }
 
 @require_http_methods(["GET"])
 def me_endpoint(request):
     try:
-        cat_fact_url = "https://catfact.ninja/fact"
+        cat_fact_url = settings.CAT_FACT_URL
 
         response = requests.get(cat_fact_url, timeout=5)
         response.raise_for_status()
