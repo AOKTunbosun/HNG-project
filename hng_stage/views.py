@@ -2,13 +2,16 @@ from django.shortcuts import render
 import requests
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
+from datetime import datetime
 
 
 MY_DETAILS = {
-    "full_name": "Keruwole AbdAllah Olatunbosun",
-    "email": "aokolatunbosun@gmail.com",
-    "tech_stack": ["Django"],
-    "stage": 0,
+    "status": "success",
+    "user":{
+        "name": "Keruwole AbdAllah Olatunbosun",
+        "email": "aokolatunbosun@gmail.com",
+        "stack": "Python/Django"},
+    
 }
 
 @require_http_methods(["GET"])
@@ -21,7 +24,10 @@ def me_endpoint(request):
 
         cat_data = response.json()
 
+        now_utc_time = datetime.utcnow()
+
         final_response = MY_DETAILS.copy()
+        final_response["timestamp"] = now_utc_time.isoformat()
         final_response["cat_fact"] = cat_data.get("fact", "No fact available")
 
         return JsonResponse(final_response)
@@ -31,10 +37,12 @@ def me_endpoint(request):
         error_response = {
             "error": f"Service Unavailable: Could not fetch cat fact. Error Details: {e}"
         }
+        error_response["timestamp"] = datetime.utcnow().isoformat()
         return JsonResponse(error_response, status=503)
     
     except Exception as e:
         error_response = {
             "error": f"An unexpected error occured. Error Details: {e}"
         }
+        error_response["timestamp"] = datetime.utcnow().isoformat()
         return JsonResponse(error_response, status=500)
