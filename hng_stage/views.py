@@ -29,7 +29,7 @@ def me_endpoint(request):
 
         final_response = MY_DETAILS.copy()
         final_response["timestamp"] = now_utc_time.isoformat()
-        final_response["cat_fact"] = cat_data.get("fact", "No fact available")
+        final_response["fact"] = cat_data.get("fact", "No fact available")
 
         # Return the final JSON response
         return JsonResponse(final_response)
